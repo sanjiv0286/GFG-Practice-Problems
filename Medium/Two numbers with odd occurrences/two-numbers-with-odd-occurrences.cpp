@@ -18,7 +18,7 @@ class Solution{
         }
         int val = jor & ~(jor-1);
         for(long long  i=0;i<n;i++){
-            if((arr[i]&val) ==0){ // keep in mind this little mistake 
+            if((arr[i]&val) !=0){ // keep in mind this little mistake 
                 res1 = res1 ^ arr[i];
             }
             else{
