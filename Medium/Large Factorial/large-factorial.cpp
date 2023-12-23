@@ -40,16 +40,21 @@ using namespace std;
 class Solution{
 public:
     vector<long long> factorial(vector<long long> a, int n) {
-        int i, MAX = 1e5;
+        int MAX = 1e5;
+        int i;
         long long fac[MAX + 1], mod = 1e9 + 7;
         fac[0] = 1;
         for (i = 1; i <= MAX; i++) {
-            fac[i] = (fac[i - 1] * (long long)i) % mod;
+            fac[i] = (fac[i - 1] *i) % mod;
         }
         
-        vector<long long> ans(n);
+        // vector<long long> ans(n);
+        vector<long long> ans;
+
         for (i = 0; i < n; i++) {
-            ans[i] = fac[a[i]];
+            // ans[i] = fac[a[i]];
+            int fact = fac[a[i]];
+            ans.push_back(fact);
         }
         return ans;
     }
