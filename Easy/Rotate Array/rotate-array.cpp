@@ -13,7 +13,10 @@ class Solution{
     void rotateArr(int arr[], int d, int n){
         // code here
          d = d%n;
-        rotate(arr,arr+d,arr+n);
+        // rotate(arr,arr+d,arr+n);
+        reverse(arr+0,arr+d);
+         reverse(arr+d,arr+n);
+          reverse(arr+0,arr+n);
         
     }
 };
