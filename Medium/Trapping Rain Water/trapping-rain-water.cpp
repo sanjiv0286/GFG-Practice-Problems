@@ -37,7 +37,7 @@ class Solution{
             rmax[i] = max(arr[i], rmax[i + 1]);
         }
 
-        for (int i = 0; i < n ; i++) {
+        for (int i = 1; i < n-1 ; i++) {
             res += (min(lmax[i], rmax[i]) - arr[i]);
 
         }
