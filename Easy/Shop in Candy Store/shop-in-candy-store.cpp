@@ -6,28 +6,30 @@ using namespace std;
 class Solution
 {
 public:
-    vector<int> candyStore(int c[], int N, int k)
+    vector<int> candyStore(int c[], int N, int K)
     {
-       
-        int mi =0,mx=0;
-        int n=N;
-        vector<int>ans;
-        sort(c,c+n);
+        // Write Your Code here
+        int mi=0,mx=0;
+        int n = N;
+        sort(c,c+N);
         for(int i=0;i<n;i++){
             mi += c[i];
-            n -= k;
+            n -= K;
         }
-         n =0;
-        for(int i=N-1;i>=n;i--){
+        vector<int>v;
+        v.push_back(mi);
+        reverse(c,c+N);
+          n = N;
+        for(int i=0;i<n;i++){
             mx += c[i];
-            n += k;
+            n -= K;
         }
-        ans.push_back(mi);
-        ans.push_back(mx);
-        return ans;
-        
+        v.push_back(mx);
+        return v;
     }
 };
+
+
 
 //{ Driver Code Starts.
 int main()
