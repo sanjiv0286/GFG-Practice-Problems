@@ -5,23 +5,19 @@ using namespace std;
 // } Driver Code Ends
 
 
-
 class Solution{
     public:
     long long findMinDiff(vector<long long> a, long long n, long long m){
     //code
-     long long j=m-1;
-     long long i =0;
-       long long mini = LLONG_MAX;
-       sort(a.begin(),a.end());
-    // for( long long i=0;i<n;i++){
-    while(j<n){
-         long long val = abs(a[i++]-a[j++]);
-         mini  = min(mini,val);
-        // j++;
+    sort(a.begin(),a.end());
+     long long j=0;
+      long long ans =INT_MAX;
+    for( long long i=m-1;i<n;i++){
+        long long  diff = abs(a[j]-a[i]);
+        ans = min(ans,diff);
+        j++;
     }
-    return mini;
-    
+    return ans;
     }   
 };
 
