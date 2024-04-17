@@ -26,41 +26,34 @@ int getNthFromLast(struct Node* head, int n);
 /* Driver program to test above function*/
 
 // } Driver Code Ends
-/* struct Node {
-  int data;
-  struct Node *next;
-  Node(int x) {
-    data = x;
-    next = NULL;
-  }
-};
-*/
 
-//Function to find the data of nth node from the end of a linked list.
+
+// by using two pointer and referenece
 class Solution{
 public:
+
     int getNthFromLast(Node *head, int n)
     {
-        Node *curr = head;
-        int len =0;
-        while(curr!=NULL){
-            len++;
-            curr = curr->next;
-        }
-        if(len<n){
-            return -1;
-        }
-        int i = len-n;
-        curr = head;
-        while(i!=0){
-            
-            curr=curr->next;
-            i--;
-        }
-        return curr->data;
-        
+        // if(head == NULL){
+        //     return -1;
+        // }
+         Node*  f = head;
+         for(int i=0;i<n;i++) {
+             if(f==NULL){
+                 return -1; 
+             }
+             f = f->next;
+         }
+         Node *s = head;
+         while(f != NULL){
+             s= s->next;
+             f= f->next;
+         }
+         return s->data;
     }
 };
+
+
 
 
 
