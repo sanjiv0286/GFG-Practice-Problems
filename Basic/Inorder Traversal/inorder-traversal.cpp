@@ -18,34 +18,28 @@ struct Node {
 // } Driver Code Ends
 
 
-// class Solution {
-//   public:
-//     vector<int> inOrder(Node* root) {
-//         vector<int>v;
-//         if(root!=NULL){
-//           inOrder(root->left);
-//           v.push_back(root->data);
-//           inOrder(root->right);
-//         }
-//         return v;
-//     }
-// };
 class Solution {
-public:
-    vector<int> inOrder(Node* root) {
-        vector<int> v;
-        if (root != NULL) {
-            vector<int> left = inOrder(root->left);
-            v.insert(v.end(), left.begin(), left.end());
-            
-            v.push_back(root->data);
-            
-            vector<int> right = inOrder(root->right);
-            v.insert(v.end(), right.begin(), right.end());
+  public:
+    
+    void inorder(vector<int>&v,Node* &root){
+        if(root ==NULL){
+            return ;
         }
+          if(root!=NULL){
+          inorder(v,root->left);
+          v.push_back(root->data);
+          inorder(v,root->right);
+        }
+    }
+    vector<int> inOrder(Node* root) {
+        vector<int>v;
+      
+        inorder(v,root);
         return v;
     }
 };
+
+
 
 
 
