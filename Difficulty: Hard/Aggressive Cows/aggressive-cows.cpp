@@ -31,7 +31,7 @@ public:
         int l =1;
         int h = s[n-1]-s[0];
         while(l<=h){
-            int mid = (l+h)/2;
+            int mid = (l+(h))>>1;
             if(ispossible(n,k,s,mid)){
                 l = mid+1;
             }
@@ -40,9 +40,6 @@ public:
             }
         }
         return h;
-        
-    
-        // Write your code here
     }
 };
 
