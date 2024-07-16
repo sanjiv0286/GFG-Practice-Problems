@@ -6,84 +6,47 @@ using namespace std;
 // } Driver Code Ends
 // design the class in the most optimal way
 
-#include <unordered_map>
 
-struct Node {
-    int key;
-    int value;
-    Node* prev;
-    Node* next;
-    Node(int k, int v) : key(k), value(v), prev(nullptr), next(nullptr) {}
-};
 
 class LRUCache {
-private:
-    int capacity;
-    std::unordered_map<int, Node*> cache;
-    Node* head;
-    Node* tail;
-
-    void remove(Node* node) {
-        if (node->prev) {
-            node->prev->next = node->next;
-        } else {
-            head = node->next;
-        }
-        if (node->next) {
-            node->next->prev = node->prev;
-        } else {
-            tail = node->prev;
-        }
-    }
-
-    void insertToHead(Node* node) {
-        node->next = head;
-        node->prev = nullptr;
-        if (head) {
-            head->prev = node;
-        }
-        head = node;
-        if (!tail) {
-            tail = head;
-        }
-    }
-
 public:
-    // Constructor for initializing the cache capacity with the given value.
-    LRUCache(int cap) : capacity(cap), head(nullptr), tail(nullptr) {}
+    list<int> dll;
+    map<int, pair<list<int>::iterator, int>> mp;
+    int n;
+    LRUCache(int capacity) { n = capacity; }
 
-    // Function to return value corresponding to the key.
+    void solve(int key) {
+        dll.erase(mp[key].first);
+        dll.push_front(key);
+        mp[key].first = dll.begin();
+    }
+
     int GET(int key) {
-        if (cache.find(key) == cache.end()) {
+        if (mp.find(key) == mp.end()) {
             return -1;
         }
-        Node* node = cache[key];
-        remove(node);
-        insertToHead(node);
-        return node->value;
+        solve(key);
+        return mp[key].second;
     }
 
-    // Function for storing key-value pair.
     void SET(int key, int value) {
-        if (cache.find(key) != cache.end()) {
-            Node* node = cache[key];
-            node->value = value;
-            remove(node);
-            insertToHead(node);
+
+        if (mp.find(key) != mp.end()) {
+            mp[key].second = value;
+            solve(key);
+
         } else {
-            if (cache.size() >= capacity) {
-                cache.erase(tail->key);
-                remove(tail);
-            }
-            Node* newNode = new Node(key, value);
-            insertToHead(newNode);
-            cache[key] = newNode;
+            dll.push_front(key);
+            mp[key] = {dll.begin(), value};
+            n--;
+        }
+        if (n < 0) {
+            mp.erase(dll.back());
+            dll.pop_back();
+            n++;
         }
     }
 };
-
-
-
 
 //{ Driver Code Starts.
 
